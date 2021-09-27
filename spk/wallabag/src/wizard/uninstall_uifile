@@ -1,37 +1,75 @@
 [
-   {
-      "step_title":"Remove wallabag database",
-      "items":[
-         {
-            "desc":"Attention: The wallabag database will be removed during package uninstallation. All entries will be deleted."
-         },
-         {
-            "type":"password",
-            "desc":"Enter your MySQL password",
-            "subitems":[
-               {
-                  "key":"wizard_mysql_password_root",
-                  "desc":"Root password"
-               }
-            ]
-         },
-         {
-            "type":"textfield",
-            "desc":"Optional: Provide directory for database export. Leave blank to skip export. The directory will be created if it does not exist",
-            "subitems":[
-               {
-                  "key":"wizard_dbexport_path",
-                  "desc":"Database export location",
-                  "validator":{
-                     "allowBlank":true,
-                     "regex":{
-                        "expr":"/^\\\/volume[0-9]+\\\//",
-                        "errorText":"Path should begin with /volume?/ with ? the number of the volume"
-                     }
-                  }
-               }
-            ]
-         }
-      ]
-   }
+    {
+        "step_title": "Wallabag database configuration",
+        "items": [
+            {
+                "type": "password",
+                "desc": "Enter your MySQL root password.",
+                "subitems": [
+                    {
+                        "key": "wizard_mysql_password_root",
+                        "desc": "Root password",
+                        "defaultValue": "",
+                        "validator": {
+                            "allowBlank": false
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "password",
+                "desc": "Enter your MySQL wallabag password.",
+                "subitems": [
+                    {
+                        "key": "wizard_wallabag_password",
+                        "desc": "wallabag database password",
+                        "defaultValue": "Wallabag1!",
+                        "validator": {
+                            "allowBlank": true
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "textfield",
+                "desc": "Enter your database port",
+                "subitems": [
+                    {
+                        "key": "wizard_database_port",
+                        "desc": "Database port",
+                        "defaultValue": "3307",
+                        "emptyText": "3307",
+                        "validator": {
+                            "allowBlank": false,
+                            "regex": {
+                                "expr": "/\\d{1,6}/",
+                                "errorText": "Must be a valid port number"
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "step_title": "Uninstall package",
+        "items": [
+            {
+                "type": "singleselect",
+                "desc": "Keep or delete package settings.",
+                "subitems": [
+                    {
+                        "key": "wizard_keep_data",
+                        "desc": "<b>Uninstall only.</b> Keep existing files for future re-installation.",
+                        "defaultValue": true
+                    },
+                    {
+                        "key": "wizard_delete_data",
+                        "desc": "<b style=\"color: red\">Erase all of the package data files. (Not Recoverable)</b>",
+                        "defaultValue": false
+                    }
+                ]
+            }
+        ]
+    }
 ]

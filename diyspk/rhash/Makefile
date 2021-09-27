@@ -9,12 +9,20 @@ DESCRIPTION = "RHash is a console utility for calculation and verification of ma
 RELOAD_UI = no
 DISPLAY_NAME = rhash
 STARTABLE = no
-BETA = 1
 
 HOMEPAGE   = http://rhash.sourceforge.net/
 LICENSE    = MIT
 
-SERVICE_SETUP = src/service-setup.sh
+SPK_COMMANDS = bin/rhash
+SPK_COMMANDS += bin/ed2k-link
+SPK_COMMANDS += bin/edonr256-hash
+SPK_COMMANDS += bin/edonr512-hash
+SPK_COMMANDS += bin/gost-hash
+SPK_COMMANDS += bin/has160-hash
+SPK_COMMANDS += bin/magnet-link
+SPK_COMMANDS += bin/sfv-hash
+SPK_COMMANDS += bin/tiger-hash
+SPK_COMMANDS += bin/tth-hash
+SPK_COMMANDS += bin/whirlpool-hash
 
 include ../../mk/spksrc.spk.mk
-

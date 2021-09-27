@@ -1,0 +1,54 @@
+[
+    {
+        "step_title": "Wallabag database configuration",
+        "items": [
+            {
+                "type": "password",
+                "desc": "Enter your MySQL root password.",
+                "subitems": [
+                    {
+                        "key": "wizard_mysql_password_root",
+                        "desc": "Root database password",
+                        "defaultValue": "",
+                        "validator": {
+                            "allowBlank": false
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "password",
+                "desc": "Enter your MySQL wallabag password.",
+                "subitems": [
+                    {
+                        "key": "wizard_wallabag_password",
+                        "desc": "wallabag database password",
+                        "defaultValue": "Wallabag1!",
+                        "validator": {
+                            "allowBlank": true
+                        }
+                    }
+                ]
+            },
+            {
+                "type": "textfield",
+                "desc": "Enter your database port",
+                "subitems": [
+                    {
+                        "key": "wizard_database_port",
+                        "desc": "Database port",
+                        "defaultValue": "3307",
+                        "emptyText": "3307",
+                        "validator": {
+                            "allowBlank": false,
+                            "regex": {
+                                "expr": "/\\d{1,6}/",
+                                "errorText": "Must be a valid port number"
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

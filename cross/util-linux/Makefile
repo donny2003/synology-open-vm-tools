@@ -1,6 +1,6 @@
 PKG_NAME = util-linux
-PKG_VERS_MAJOR = 2.33
-PKG_VERS_MINOR = 1
+PKG_VERS_MAJOR = 2.36
+PKG_VERS_MINOR = 2
 PKG_VERS = $(PKG_VERS_MAJOR).$(PKG_VERS_MINOR)
 PKG_EXT = tar.xz
 PKG_DIST_NAME = $(PKG_NAME)-$(PKG_VERS).$(PKG_EXT)
@@ -17,7 +17,9 @@ GNU_CONFIGURE = 1
 CONFIGURE_ARGS  = --without-ncurses --without-python
 CONFIGURE_ARGS += --disable-all-programs --enable-libuuid
 
-ifeq ($(findstring $(ARCH), hi3535),$(ARCH))
+include ../../mk/spksrc.archs.mk
+
+ifeq ($(findstring $(ARCH),$(ARMv7L_ARCHS)),$(ARCH))
 CONFIGURE_ARGS += --disable-schedutils
 else
 CONFIGURE_ARGS += --enable-schedutils

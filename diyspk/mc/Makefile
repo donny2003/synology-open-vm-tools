@@ -1,27 +1,21 @@
 SPK_NAME = mc
-SPK_VERS = 4.8.23
-SPK_REV = 6
+SPK_VERS = 4.8.26
+SPK_REV = 9
 SPK_ICON = src/mc.png
 
 DEPENDS = cross/mc
 
 MAINTAINER = SynoCommunity
 DESCRIPTION = Midnight Commander is a console application with a text user interface. The main interface consists of two panels which display the file system.
-DESCRIPTION_FRE = Midnight Commander est une application en mode texte. L\'interface principale se compose de deux « panneaux » qui affichent les fichiers présents par rapport à leur emplacement sur le disque.
+DESCRIPTION_FRE = Midnight Commander est une application en mode texte. L\'interface principale se compose de deux «panneaux» qui affichent les fichiers présents par rapport à leur emplacement sur le disque.
 RELOAD_UI = no
 DISPLAY_NAME = Midnight Commander
 STARTABLE = no
-CHANGELOG = Update to 4.8.23
+CHANGELOG = "Update mc to version 4.8.26"
 
-HOMEPAGE = http://www.midnight-commander.org
-LICENSE  = GNU GPL
+HOMEPAGE = https://www.midnight-commander.org
+LICENSE  = GPL
 
-SERVICE_SETUP = src/service-setup.sh
-
-POST_STRIP_TARGET = mc_extra_install
+SPK_COMMANDS = bin/mc bin/mcdiff bin/mcview bin/mcedit
 
 include ../../mk/spksrc.spk.mk
-
-.PHONY: mc_extra_install
-mc_extra_install:
-	install -m 755 ../../spk/synocli-file/src/mc-utf8 $(STAGING_DIR)/bin/mc-utf8

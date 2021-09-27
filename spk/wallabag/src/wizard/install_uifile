@@ -1,38 +1,80 @@
 [
-   {
-      "step_title":"Wallabag database configuration",
-      "items":[
-               {
-            "type":"password",
-            "desc":"Enter your MySQL password.",
-            "subitems":[
-               {
-                  "key":"wizard_mysql_password_root",
-                  "desc":"Root password",
-                  "validator":{
-                     "allowBlank":false
-                  }
-               }
-            ]
-         },
-         {
-            "type":"password",
-            "desc":"A 'wallabag' MySQL user and database will be created. Please enter a password for the 'wallabag' user.",
-            "subitems":[
-               {
-                  "key":"wizard_mysql_database_password",
-                  "desc":"User password",
-                  "validator":{
-                     "allowBlank":false
-                  }
-               }
-            ]
-         }
-      ]
-   }, {
+  {
+    "step_title": "Wallabag database configuration",
+    "items": [
+      {
+        "type": "password",
+        "desc": "Enter your MySQL root password.",
+        "subitems": [
+          {
+            "key": "wizard_mysql_password_root",
+            "desc": "Root database password",
+            "defaultValue": "",
+            "validator": {
+              "allowBlank": false
+            }
+          }
+        ]
+      },
+      {
+        "type": "password",
+        "desc": "Enter your MySQL wallabag password.",
+        "subitems": [
+            {
+                "key": "wizard_wallabag_password",
+                "desc": "wallabag database password",
+                "defaultValue": "Wallabag1!",
+                "validator": {
+                    "allowBlank": false
+                }
+            }
+        ]
+      },
+      {
+        "type": "textfield",
+        "desc": "Enter your database port",
+        "subitems": [
+          {
+            "key": "wizard_database_port",
+            "desc": "Database port",
+            "defaultValue": "3307",
+            "emptyText": "3307",
+            "validator": {
+              "allowBlank": false,
+              "regex": {
+                "expr": "/\\d{1,6}/",
+                "errorText": "Must be a valid port number"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
     "step_title": "First login",
-    "items": [{
-        "desc": "The default credentials for the web interface is wallabag:wallabag. Change it on 'User Management' page."
-    }]
-}
+    "items": [
+      {
+        "desc": "The default credentials for the web interface is <b>wallabag:wallabag</b>. Change it on 'User Management' page."
+      },
+      {
+        "type": "textfield",
+        "desc": "Enter your NAS domain name or IP address. e.g https://192.168.0.2",
+        "subitems": [
+          {
+            "key": "wizard_protocoll_and_domain_name",
+            "desc": "Protocol and Domain Name",
+            "emptyText": "http://",
+            "validator": {
+              "allowBlank": false,
+              "regex": {
+                "expr": "/http(s)?\\:\\/\\/.+\\..+/i",
+                "errorText": "Must be a valid URL"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
 ]

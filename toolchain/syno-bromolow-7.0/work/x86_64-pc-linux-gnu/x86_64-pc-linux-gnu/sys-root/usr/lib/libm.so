@@ -1,0 +1,4 @@
+/* GNU ld script
+*/
+OUTPUT_FORMAT(elf64-x86-64)
+GROUP ( /lib/libm.so.6  AS_NEEDED ( /usr/lib/libmvec_nonshared.a /lib/libmvec.so.1 ) )

@@ -1,13 +1,16 @@
 PKG_NAME = x264
-PKG_VERS = 20190109-2245-stable
-PKG_EXT = tar.bz2
-PKG_DIST_NAME = $(PKG_NAME)-snapshot-$(PKG_VERS).$(PKG_EXT)
-PKG_DIST_SITE = https://download.videolan.org/x264/snapshots
-PKG_DIR = $(PKG_NAME)-snapshot-$(PKG_VERS)
+PKG_VERS = 20210413-stable
+PKG_EXT = tar.gz
+PKG_DOWNLOAD_METHOD = git
+PKG_GIT_HASH = c347e7a0b476d77674e2c9a6f137f57da026e8fc
+PKG_DIST_SITE = https://github.com/mirror/x264.git
+PKG_DIST_FILE = $(PKG_NAME)-git$(PKG_GIT_HASH).$(PKG_EXT)
+PKG_DIR = $(PKG_NAME)-git$(PKG_GIT_HASH)
 
 DEPENDS =
+OPTIONAL_DEPENDS = native/nasm
 
-HOMEPAGE = http://www.videolan.org/developers/x264.html
+HOMEPAGE = https://www.videolan.org/developers/x264.html
 COMMENT  = x264 is a free software library and application for encoding video streams into the H.264/MPEG-4 AVC forma
 LICENSE  = GPLv2
 
@@ -20,29 +23,29 @@ CONFIGURE_ARGS = --enable-shared --prefix=$(INSTALL_PREFIX) --enable-pic --cross
 
 include ../../mk/spksrc.cross-cc.mk
 
-ifeq ($(findstring $(ARCH), $(ARM5_ARCHES) $(ARM7_ARCHES)),$(ARCH))
+ifeq ($(findstring $(ARCH),$(ARMv5_ARCHS) $(ARMv7_ARCHS) $(ARMv7L_ARCHS)),$(ARCH))
 ENV += x264_ARCH=ARM
 CONFIGURE_ARGS += --disable-asm
 endif
 
-ifeq ($(findstring $(ARCH), $(ARM8_ARCHES)),$(ARCH))
+ifeq ($(findstring $(ARCH),$(ARMv8_ARCHS)),$(ARCH))
 ENV += x264_ARCH=aarch64
 CONFIGURE_ARGS += --disable-asm --host=arm-linux
 endif
 
-ifeq ($(findstring $(ARCH), $(PPC_ARCHES)),$(ARCH))
+ifeq ($(findstring $(ARCH),$(PPC_ARCHS)),$(ARCH))
 ENV += x264_ARCH=PPC
 CONFIGURE_ARGS += --disable-asm
 endif
 
-ifeq ($(findstring $(ARCH), $(x64_ARCHES)),$(ARCH))
+ifeq ($(findstring $(ARCH),$(x64_ARCHS)),$(ARCH))
 DEPENDS += native/nasm
 ENV += AS=$(NASM_PATH)/nasm
 ENV += PATH=$(NASM_PATH):$$PATH
 ENV += x264_ARCH=X86_64
 endif
 
-ifeq ($(findstring $(ARCH), $(x86_ARCHES)),$(ARCH))
+ifeq ($(findstring $(ARCH),$(i686_ARCHS)),$(ARCH))
 DEPENDS += native/nasm
 ENV += AS=$(NASM_PATH)/nasm
 ENV += PATH=$(NASM_PATH):$$PATH

@@ -1,34 +1,39 @@
 SPK_NAME = wallabag
-SPK_VERS = 2.2.3
-SPK_REV = 2
+SPK_VERS = 2.4.1
+SPK_REV = 3
 SPK_ICON = src/wallabag.png
 DSM_UI_DIR = app
 BETA = 1
 
 DEPENDS  = cross/$(SPK_NAME)
 
-MAINTAINER = tolkonepiu
+MAINTAINER = synocommunity
 DESCRIPTION = Wallabag is a self hostable application allowing you to save an offline copy of your favorite articles. Click, save, read it when you can. It extracts content so that you can read it when you have time.
+
+include ../../mk/spksrc.common.mk
+ADMIN_URL = /wallabag
+ifeq ($(call version_lt, $(TCVERSION), 7.0),1)
 ADMIN_URL = /wallabag/web/
+endif
+
 RELOAD_UI = yes
-STARTABLE = no
 DISPLAY_NAME = Wallabag
-CHANGELOG = "Initial release"
+CHANGELOG = "Update to 2.4.1, Update to MariaDB10 and php 7.4 using resouce worker"
 
 HOMEPAGE = https://www.wallabag.org/
 LICENSE  = MIT
-
-WIZARDS_DIR = src/wizard/
+LICENSE_FILE = $(WORK_DIR)/$(SPK_VERS)/COPYING.md
 
 INSTALLER_SCRIPT = src/installer.sh
-SSS_SCRIPT       = src/dsm-control.sh
+SSS_SCRIPT = src/dsm-control.sh
+WIZARDS_DIR = src/wizard/
 
-
+SPK_DEPENDS = "WebStation:MariaDB10>=10.0.30-0005:PHP7.4:Apache2.4"
 INSTALL_DEP_SERVICES = apache-web mysql
 START_DEP_SERVICES = apache-web mysql
 INSTUNINST_RESTART_SERVICES = apache-web
-
-INSTALL_PREFIX = /usr/local/$(SPK_NAME)
+CONF_DIR = src/conf
+SYSTEM_GROUP = http
 
 POST_STRIP_TARGET = wallabag_extra_install
 

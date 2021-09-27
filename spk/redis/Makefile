@@ -1,29 +1,31 @@
 SPK_NAME = redis
-SPK_VERS = 3.0.5
-SPK_REV = 5
+SPK_VERS = 5.0.12
+SPK_REV = 7
 SPK_ICON = src/redis.png
 
-DEPENDS = cross/busybox cross/$(SPK_NAME)
+DEPENDS = cross/$(SPK_NAME)
 
-MAINTAINER = Diaoul
+MAINTAINER = DigitalBox98
 DESCRIPTION = Redis is an open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.
-RELOAD_UI = yes
-DISPLAY_NAME = Redis
-CHANGELOG = "Update to 3.0.5"
 
-HOMEPAGE = http://redis.io
+DISPLAY_NAME = redis
+
+CHANGELOG = "Update redis to v5.0.12"
+
+# PPC archs except qoriq are not supported anymore
+UNSUPPORTED_ARCHS = $(OLD_PPC_ARCHS)
+
+HOMEPAGE = https://redis.io
 LICENSE  = 3-clause BSD
 
-INSTALLER_SCRIPT = src/installer.sh
-SSS_SCRIPT       = src/dsm-control.sh
-CONF_DIR         = src/conf/
-
-INSTALL_PREFIX = /usr/local/$(SPK_NAME)
+STARTABLE = yes
+SERVICE_USER = auto
+SERVICE_SETUP = src/service-setup.sh
 
 POST_STRIP_TARGET = redis_extra_install
 
-BUSYBOX_CONFIG = usrmng
-ENV += BUSYBOX_CONFIG="$(BUSYBOX_CONFIG)"
+# add links for tools
+SPK_COMMANDS = bin/redis-benchmark bin/redis-check-aof bin/redis-check-rdb bin/redis-cli
 
 include ../../mk/spksrc.spk.mk
 
